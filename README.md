@@ -1,4 +1,4 @@
-# `AbortSignal` Composition: `AbortSignal.any()`
+# `AbortSignal.any()`
 
 ## Authors
 
@@ -457,7 +457,7 @@ based on this graph will be explored in a subsequent design doc.
 
 #### Exposure through `AbortSignal` vs. `AbortController`
 
-Exposing a signal composition API through `AbortController` requires a
+Exposing a signal combinator API through `AbortController` requires a
 controller to be created for every composite signal &mdash; whether or not it
 is necessary. Consider for example combining a timeout with an existing
 top-level *parent signal*:
@@ -527,14 +527,14 @@ departure from .NET's approach, it does not limit functionality.
 `AbortSignal` currently has a private constructor and `AbortSingal` objects can
 only be be created indirectly through an `AbortController` or `AbortSignal`
 factory methods. We don't want to change how such existing`AbortSignal`s are
-constructed, so exposing composition through an `AbortSignal` constructor is
-not a great conceptual fit since would *only* create composite signals (and
-not the *constituent* signals). It might make sense if we were subclassing
+constructed, so exposing a combinator through an `AbortSignal` constructor is
+not a great conceptual fit since would *only* create composite signals (and not
+the *constituent* signals). It might make sense if we were subclassing
 `AbortSignal`, but that is not the approach we take here.
 
-Exposing signal composition through a factory method is also consistent with
+Exposing a signal combinator through a factory method is also consistent with
 how other `AbortSignal`s are created, e.g. `AbortSignal.timeout()`, and is
-[analogous](#abortsignalracesignals) to `Promises` composition (i.e.
+[analogous](#abortsignalracesignals) to `Promise` combinators (i.e.
 `Promise.any()`).
 
 ### Should this work with a single signal?
@@ -636,9 +636,9 @@ analogy.
 
 ### Alternative or Additional APIs
 
-`AbortSignal.any()` presents a relatively high-level solution for composing
+`AbortSignal.any()` presents a relatively high-level solution for combining
 `AbortSignal`s. There are proposals for primitives which could allow userland
-`AbortSignal` composition while avoiding the memory management issues that come
+`AbortSignal` combining while avoiding the memory management issues that come
 with the existing [Userland Solutions](#userland-solutions).
 
 In this section we detail those proposals. Our overall conclusion is that using
@@ -646,7 +646,7 @@ them would require very careful and complex userland code to get the same
 benefits as `AbortSignal.any()`. Although we could consider adding them in the
 future &mdash; in particular, weak event listeners seem like they probably have
 other non-AbortSignal-related use cases &mdash; for targeting the `AbortSignal`
-composition problem, we think they are not the right approach.
+chaining problem, we think they are not the right approach.
 
 #### `AbortController.prototype.close()`
 
