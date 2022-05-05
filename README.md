@@ -122,6 +122,9 @@ scope), but this is non-trivial to implement in userland.
 
 - Create an ergonomic API that enables combining `AbortSignal`s and avoids the
   memory leaks inherent to the `addEventListener` userland approach
+- Replace the `AbortSignal` [*follow
+  algorithm*](https://dom.spec.whatwg.org/#abortsignal-follow) with a new
+  primitive to be used in existing specs (fetch) and in specifiying this API
 
 ## Non-goals
 
