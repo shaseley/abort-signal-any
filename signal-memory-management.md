@@ -102,10 +102,10 @@ aborted).
 
 ### Additional Resource Management
 
-As discussed in [this issue](), pending timers associated with timeout signals
-where the abort cannot be observed can be problematic on some platforms and can
-waste resources, e.g. wasted CPU cycles and excessive wake-ups. This can be
-mitigated by:
+As discussed in [this issue](https://github.com/shaseley/abort-signal-any/issues/3)
+pending timers associated with timeout signals where the abort cannot be
+observed can be problematic on some platforms and can waste resources, e.g.
+wasted CPU cycles and excessive wake-ups. This can be mitigated by:
 
 1. Implementing the behavior described above, which allows a timeout signal to
    be GCed as long as it doesn't have observers, and
